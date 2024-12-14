@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>اقوى مشروع</title>
+    <style>
+        
+        a.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+a.button-link:hover {
+  background-color: #45a049;
+}
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('wallpaperflare.com_wallpaper (4).jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        /* Logo Styles */
+        .logo {
+    width: 80px; /* Reduce the size of the logo */
+    height: auto; /* Maintain the aspect ratio */
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+        /* Pop-up styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            display: none;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Animation for pop-up fade-in */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.2);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #343433;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: black;
+        }
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .logo {
+            width: 70px; /* Adjust the size of the logo */
+            height: auto;
+            position: fixed;
+            top: 13.9%; /* Position vertically centered */
+            left: 87%; /* Position horizontally centered */
+            transform: translate(-50%, -50%); /* Adjust for perfect centering */
+            cursor: pointer;
+            animation: shake 0.6s ease-in-out infinite; /* Animation for shaking effect */
+        }
+
+        /* Shake animation to simulate alert effect */
+        @keyframes shake {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            25% {
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(-10deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+
+    </style>
+    <script>
+        const countryCodes = {
+            "+1": "United States🇺🇸/Canada🇨🇦",
+            "+7": "Russia🇷🇺/Kazakhstan🇰🇿",
+            "+20": "Egypt🇪🇬",
+            "+27": "South Africa🇿🇦",
+            "+30": "Greece🇬🇷",
+            "+31": "Netherlands🇳🇱",
+            "+32": "Belgium🇧🇪",
+            "+33": "France🇫🇷",
+            "+34": "Spain🇪🇸",
+            "+36": "Hungary🇭🇺",
+            "+39": "Italy🇮🇹",
+            "+40": "Romania🇷🇴",
+            "+41": "Switzerland🇨🇭",
+            "+43": "Australia🇦🇺",
+            "+44": "United Kingdom🇬🇧",
+            "+45": "Denmark🇩🇰",
+            "+46": "Sweden🇸🇪",
+            "+47": "Norway🇳🇴",
+            "+48": "Poland🇵🇱",
+            "+49": "Germany🇩🇪",
+            "+51": "Peru🇵🇪",
+            "+52": "Mexico🇲🇽",
+            "+53": "Cuba🇨🇺",
+            "+54": "Argentina🇦🇷",
+            "+55": "Brazil🇧🇷",
+            "+56": "Chile🇨🇱",
+            "+57": "Colombia🇨🇴",
+            "+58": "Venezuela🇻🇪",
+            "+60": "Malaysia🇲🇾",
+            "+61": "Australia🇦🇺",
+            "+62": "Indonesia🇮🇩",
+            "+63": "Philippines🇵🇭",
+            "+64": "New Zealand🇳🇿",
+            "+65": "Singapore🇸🇬",
+            "+66": "Thailand🇹🇭",
+            "+81": "Japan🇯🇵",
+            "+82": "South Korea🇰🇷",
+            "+84": "Vietnam🇻🇳",
+            "+86": "China🇨🇳",
+            "+90": "Turkey🇹🇷",
+            "+91": "India🇮🇳",
+            "+92": "Pakistan🇵🇰",
+            "+93": "Afghanistan🇦🇫",
+            "+94": "Sri Lanka🇱🇰",
+            "+95": "Myanmar🇲🇲",
+            "+98": "Iran🇮🇷",
+            "+211": "South Sudan🇸🇸",
+            "+212": "Morocco🇲🇦",
+            "+213": "Algeria🇩🇿",
+            "+216": "Tunisia🇹🇳",
+            "+218": "Libya🇱🇾",
+            "+220": "Gambia🇬🇲",
+            "+221": "Senegal🇸🇳",
+            "+222": "Mauritania🇲🇷",
+            "+223": "Mali🇲🇱",
+            "+224": "Guinea🇬🇳",
+            "+225": "Ivory Coast🇨🇮",
+            "+226": "Burkina Faso🇧🇫",
+            "+227": "Niger🇳🇪",
+            "+228": "Togo🇹🇬",
+            "+229": "Benin🇧🇯",
+            "+230": "Mauritius🇲🇺",
+            "+231": "Liberia🇱🇷",
+            "+232": "Sierra Leone🇸🇱",
+            "+233": "Ghana🇬🇭",
+            "+234": "Nigeria🇳🇬",
+            "+235": "Chad🇹🇩",
+            "+236": "Central African Republic🇨🇫",
+            "+237": "Cameroon🇨🇲",
+            "+238": "Cape Verde🇨🇻",
+            "+239": "Sao Tome and Principe🇸🇹",
+            "+240": "Equatorial Guinea🇬🇶",
+            "+241": "Gabon🇬🇦",
+            "+242": "Congo🇨🇬",
+            "+243": "DR Congo🇨🇩",
+            "+244": "Angola🇦🇴",
+            "+245": "Guinea-Bissau🇬🇼",
+            "+246": "British Indian Ocean Territory🇮🇴",
+            "+248": "Seychelles🇸🇨",
+            "+249": "Sudan🇸🇩",
+            "+250": "Rwanda🇷🇼",
+            "+251": "Ethiopia🇪🇹",
+            "+252": "Somalia🇸🇴",
+            "+253": "Djibouti🇩🇯",
+            "+254": "Kenya🇰🇪",
+            "+255": "Tanzania🇹🇿",
+            "+256": "Uganda🇺🇬",
+            "+257": "Burundi🇧🇮",
+            "+258": "Mozambique🇲🇿",
+            "+260": "Zambia🇿🇲",
+            "+261": "Madagascar🇲🇬",
+            "+262": "Reunion🇷🇪",
+            "+263": "Zimbabwe🇿🇼",
+            "+264": "Namibia🇳🇦",
+            "+265": "Malawi🇲🇼",
+            "+266": "Lesotho🇱🇸",
+            "+267": "Botswana🇧🇼",
+            "+268": "Eswatini🇸🇿",
+            "+269": "Comoros🇰🇲",
+            "+290": "Saint Helena🇸🇭",
+            "+291": "Eritrea🇪🇷",
+            "+297": "Aruba🇦🇼",
+            "+298": "Faroe Islands🇫🇴",
+            "+299": "Greenland🇬🇱",
+            "+971": "United Arab Emirates🇦🇪",
+            "+966": "Saudi Arabia🇸🇦",
+            "+963": "Syria🇸🇾",
+            "+967": "Yemen🇾🇪",
+            "+974": "Qatar🇶🇦",
+            "+970": "Palestine free🇵🇸",
+            "+968": "Oman🇴🇲",
+            "+961": "Lebanon🇱🇧",
+            "+965": "Kuwait🇰🇼",
+            "+962": "Jordan🇯🇴",
+            "+964": "Iraq🇮🇶"
+
+
+            // Add more country codes as needed
+        };
+
+        function updateCountry() {
+            const phoneInput = document.getElementById('phone').value;
+            const countrySelect = document.getElementById('country');
+            const codeMatch = phoneInput.match(/^\+(\d{1,3})/);
+            
+            if (codeMatch) {
+                const countryCode = `+${codeMatch[1]}`;
+                const countryName = countryCodes[countryCode] || "Unknown";
+
+                // Automatically set the country dropdown
+                for (let option of countrySelect.options) {
+                    if (option.text === countryName) {
+                        countrySelect.value = option.value;
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="container">
+        <h1>Registration Form😍</h1>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="ادخل الاسم" required>
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" placeholder="ادخل اللقب" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="اكتب رقم هاتفك (e.g., +216123456789)" required pattern="\+\d{1,3}-?\d{6,15}" title="Phone number must include country code (e.g., +216123456789)" oninput="updateCountry()" value="+">
+
+            <label for="country">Country:</label>
+            <select id="country" name="country" required>
+                <option value="">اضف دولتك</option>
+                <option value="United States🇺🇸/Canada🇨🇦">United States🇺🇸/Canada🇨🇦</option>
+                <option value="Tunisia🇹🇳">Tunisia🇹🇳</option>
+                <option value="France🇫🇷">France🇫🇷</option>
+                <option value="Germany🇩🇪">Germany🇩🇪</option>
+                <option value="United Kingdom🇬🇧">United Kingdom🇬🇧</option>
+                <option value="India🇮🇳">India🇮🇳</option>
+                <option value="Japan🇯🇵">Japan🇯🇵</option>
+                <option value="China🇨🇳">China🇨🇳</option>
+                <option value="Russia🇷🇺">Russia🇷🇺</option>
+                <option value="Australia🇦🇺">Australia🇦🇺</option>
+                <option value="South Africa🇿🇦">South Africa🇿🇦</option>
+                <option value="Nigeria🇳🇬">Nigeria🇳🇬</option>
+                <option value="Brazil🇧🇷">Brazil🇧🇷</option>
+                <option value="Spain🇪🇸">Spain🇪🇸</option>
+                <option value="Italy🇮🇹">Italy🇮🇹</option>
+                <option value="Turkey🇹🇷">Turkey🇹🇷</option>
+                <option value="New Zealand🇳🇿">New Zealand🇳🇿</option>
+                <option value="Sweden🇸🇪">Sweden🇸🇪</option>
+                <option value="Switzerland🇨🇭">Switzerland🇨🇭</option>
+                <option value="Portugal🇵🇹">Portugal🇵🇹</option>
+                <option value="Netherlands🇳🇱">Netherlands🇳🇱</option>
+                <option value="Indonesia🇮🇩">Indonesia🇮🇩</option>
+                <option value="Philippines🇵🇭">Philippines🇵🇭</option>
+                <option value="Poland🇵🇱">Poland🇵🇱</option>
+                <option value="Mexico🇲🇽">Mexico🇲🇽</option>
+                <option value="Norway🇳🇴">Norway🇳🇴</option>
+                <option value="Greece🇬🇷">Greece🇬🇷</option>
+                <option value="Afghanistan🇦🇫">Afghanistan🇦🇫</option>
+                <option value="Albania🇦🇱">Albania🇦🇱</option>
+                <option value="Algeria🇩🇿">Algeria🇩🇿</option>
+                <option value="Andorra🇦🇩">Andorra🇦🇩</option>
+                <option value="Angola🇦🇴">Angola🇦🇴</option>
+                <option value="Argentina🇦🇷">Argentina🇦🇷</option>
+                <option value="Armenia🇦🇲">Armenia🇦🇲</option>
+                <option value="Egypt🇪🇬">Egypt🇪🇬</option>
+                <option value="Mauritania🇲🇷">Mauritania🇲🇷</option>
+                <option value="Libya🇱🇾">Libya🇱🇾</option>
+                <option value="Sudan🇸🇩">Sudan🇸🇩</option>
+                <option value="United Arab Emirates🇦🇪">United Arab Emirates🇦🇪</option>
+                <option value="Saudi Arabia🇸🇦">Saudi Arabia🇸🇦</option>
+                <option value="Syria🇸🇾">Syria🇸🇾</option>
+                <option value="Yemen🇾🇪">Yemen🇾🇪</option>
+                <option value="Qatar🇶🇦">Qatar🇶🇦</option>
+                <option value="Palestine free🇵🇸">Palestine free🇵🇸</option>
+                <option value="Oman🇴🇲">Oman🇴🇲</option>
+                <option value="Lebanon🇱🇧">Lebanon🇱🇧</option>
+                <option value="Kuwait🇰🇼">Kuwait🇰🇼</option>
+                <option value="Jordan🇯🇴">Jordan🇯🇴</option>
+                <option value="Iraq🇮🇶">Iraq🇮🇶</option>
+                <option value="Morocco🇲🇦">Morocco🇲🇦</option>
+                <option value="Belgium🇧🇪">Belgium🇧🇪</option>
+                <option value="Hungary🇭🇺">Hungary🇭🇺</option>
+                <option value="Romania🇷🇴">Romania🇷🇴</option>
+                <option value="Denmark🇩🇰">Denmark🇩🇰</option>
+                <option value="Peru🇵🇪">Peru🇵🇪</option>
+                <option value="Cuba🇨🇺">Cuba🇨🇺</option>
+                <option value="Chile🇨🇱">Chile🇨🇱</option>
+                <option value="Colombia🇨🇴">Colombia🇨🇴</option>
+                <option value="Venezuela🇻🇪">Venezuela🇻🇪</option>
+                <option value="Malaysia🇲🇾">Malaysia🇲🇾</option>
+                <option value="Singapore🇸🇬">Singapore🇸🇬</option>
+                <option value="Thailand🇹🇭">Thailand🇹🇭</option>
+                <option value="South Korea🇰🇷">South Korea🇰🇷</option>
+                <option value="Vietnam🇻🇳">Vietnam🇻🇳</option>
+                <option value="Pakistan🇵🇰">Pakistan🇵🇰</option>
+                <option value="Sri Lanka🇱🇰">Sri Lanka🇱🇰</option>
+                <option value="Myanmar🇲🇲">Myanmar🇲🇲</option>
+                <option value="Iran🇮🇷">Iran🇮🇷</option>
+                <option value="South Sudan🇸🇸">South Sudan🇸🇸</option>
+                <option value="Gambia🇬🇲">Gambia🇬🇲</option>
+                <option value="Senegal🇸🇳">Senegal🇸🇳</option>
+                <option value="Mali🇲🇱">Mali🇲🇱</option>
+                <option value="Guinea🇬🇳">Guinea🇬🇳</option>
+                <option value="Ivory Coast🇨🇮">Ivory Coast🇨🇮</option>
+                <option value="Burkina Faso🇧🇫">Burkina Faso🇧🇫</option>
+                <option value="Niger🇳🇪">Niger🇳🇪</option>
+                <option value="Togo🇹🇬">Togo🇹🇬</option>
+                <option value="Benin🇧🇯">Benin🇧🇯</option>
+                <option value="Mauritius🇲🇺">Mauritius🇲🇺</option>
+                <option value="Liberia🇱🇷">Liberia🇱🇷</option>
+                <option value="Sierra Leone🇸🇱">Sierra Leone🇸🇱</option>
+                <option value="Ghana🇬🇭">Ghana🇬🇭</option>
+                <option value="Chad🇹🇩">Chad🇹🇩</option>
+                <option value="Central African Republic🇨🇫">Central African Republic🇨🇫</option>
+                <option value="Cameroon🇨🇲">Cameroon🇨🇲</option>
+                <option value="Cape Verde🇨🇻">Cape Verde🇨🇻</option>
+                <option value="Sao Tome and Principe🇸🇹">Sao Tome and Principe🇸🇹</option>
+                <option value="Equatorial Guinea🇬🇶">Equatorial Guinea🇬🇶</option>
+                <option value="Gabon🇬🇦">Gabon🇬🇦</option>
+                <option value="Congo🇨🇬">Congo🇨🇬</option>
+                <option value="DR Congo🇨🇩">DR Congo🇨🇩</option>
+                <option value="Guinea-Bissau🇬🇼">Guinea-Bissau🇬🇼</option>
+                <option value="British Indian Ocean Territory🇮🇴">British Indian Ocean Territory🇮🇴</option>
+                <option value="Seychelles🇸🇨">Seychelles🇸🇨</option>
+                <option value="Rwanda🇷🇼">Rwanda🇷🇼</option>
+                <option value="Ethiopia🇪🇹">Ethiopia🇪🇹</option>
+                <option value="Somalia🇸🇴">Somalia🇸🇴</option>
+                <option value="Djibouti🇩🇯">Djibouti🇩🇯</option>
+                <option value="Kenya🇰🇪">Kenya🇰🇪</option>
+                <option value="Tanzania🇹🇿">Tanzania🇹🇿</option>
+                <option value="Uganda🇺🇬">Uganda🇺🇬</option>
+                <option value="Burundi🇧🇮">Burundi🇧🇮</option>
+                <option value="Mozambique🇲🇿">Mozambique🇲🇿</option>
+                <option value="Zambia🇿🇲">Zambia🇿🇲</option>
+                <option value="Madagascar🇲🇬">Madagascar🇲🇬</option>
+                <option value="Reunion🇷🇪">Reunion🇷🇪</option>
+                <option value="Zimbabwe🇿🇼">Zimbabwe🇿🇼</option>
+                <option value="Namibia🇳🇦">Namibia🇳🇦</option>
+                <option value="Malawi🇲🇼">Malawi🇲🇼</option>
+                <option value="Lesotho🇱🇸">Lesotho🇱🇸</option>
+                <option value="Botswana🇧🇼">Botswana🇧🇼</option>
+                <option value="Eswatini🇸🇿">Eswatini🇸🇿</option>
+                <option value="Comoros🇰🇲">Comoros🇰🇲</option>
+                <option value="Saint Helena🇸🇭">Saint Helena🇸🇭</option>
+                <option value="Eritrea🇪🇷">Eritrea🇪🇷</option>
+                <option value="Aruba🇦🇼">Aruba🇦🇼</option>
+                <option value="Faroe Islands🇫🇴">Faroe Islands🇫🇴</option>
+                <option value="Greenland🇬🇱">Greenland🇬🇱</option>
+                <option value="Russia🇷🇺/Kazakhstan🇰🇿">Russia🇷🇺/Kazakhstan🇰🇿</option>
+                <!-- Add more countries dynamically if necessary -->
+            </select>
+            <!-- Audio Element -->
+<!-- WhatsApp Logo (Click to Go to Group) -->
+<a href="https://chat.whatsapp.com/FI8MgWuRb510Gwmy8fl0FC" target="_blank">
+    <img src="whatsapp-logo.png" alt="WhatsApp" style="width: 50px; position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
+</a>
+    <audio id="backgroundAudio" loop>
+        <source src="song.MP3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Logo Image (Click to Play Audio) -->
+    <img src="your-logo.png" alt="Logo" class="logo" onclick="playAudio()">
+
+    <!-- Pop-up Message -->
+    <div id="popup" class="popup">
+        Audio is now playing😇!
+    </div>
+
+    <script>
+        // Function to play the audio
+        function playAudio() {
+            const audio = document.getElementById('backgroundAudio');
+            const popup = document.getElementById('popup');
+
+            // Play audio
+            audio.play().catch((error) => {
+                alert('There was an error trying to play the audio.');
+                console.log(error);
+            });
+
+            // Show pop-up with animation
+            popup.style.display = 'block';
+
+            // Hide pop-up after 3 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000); // 3 seconds
+        }
+    </script>
+
+            <label for="date">Registration Date:(*تاريخ انضمامك للمشروع)</label>
+            <input type="date" id="date" name="date" required>
+            <a href="home.html" class="button-link" id="registerButton" style="pointer-events: none; opacity: 0.5;">Register</a>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const form = document.getElementById("registrationForm");
+                    const registerButton = document.getElementById("registerButton");
+            
+                    const validateForm = () => {
+                        const inputs = form.querySelectorAll("input[required], select[required]");
+                        const allFilled = Array.from(inputs).every(input => input.value.trim() !== "");
+                        
+                        if (allFilled) {
+                            registerButton.style.pointerEvents = "auto";
+                            registerButton.style.opacity = "1";
+                        } else {
+                            registerButton.style.pointerEvents = "none";
+                            registerButton.style.opacity = "0.5";
+                        }
+                    };
+            
+                    form.addEventListener("input", validateForm);
+                });
+            </script>
+            
+
+        </form>
+    </div>
+    <script>
+        // JavaScript function to trigger the alert
+        function triggerAlert() {
+            // Triggering a shaking effect by adding the animation class
+            const logo = document.querySelector('.logo');
+            logo.style.animation = 'shake 0.5s ease-in-out'; // Apply the shake animation
+
+            // After the animation, trigger the alert
+            setTimeout(() => {
+                alert("This is an alert triggered by the logo!");
+            }, 500); // Delay the alert so it triggers after the shake
+        }
+    </script>
+    <!-- Admins Logo -->
+<a href="admins.html">
+    <img src="admin-logo.png" alt="Admins Page" style="width: 27px; position: fixed; top: 20px; right: 20px; cursor: pointer;">
+    
+</a>
+
+</body>
+</html>
